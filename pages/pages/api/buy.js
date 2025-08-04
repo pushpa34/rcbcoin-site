@@ -14,10 +14,9 @@ const razorpay = new Razorpay({
 
 export async function POST(req) {
   try {
-    const { userAddress, amountInINR } = await req.json();
-
-    // Example fixed price: 1 RCB = ₹1
     const { userAddress, amountINR } = await req.json();
+await sendToken(userAddress, parseInt(amountINR));
+
 
     return NextResponse.json({ success: true, hash: tx.hash });
   } catch (error) {
