@@ -6,14 +6,6 @@ import Razorpay from 'razorpay';
 
 dotenv.config();
 
-const provider = new ethers.providers.JsonRpcProvider("https://bsc-dataseed.binance.org/");
-const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
-const tokenAddress = process.env.TOKEN_ADDRESS;
-const tokenABI = [
-  "function transfer(address to, uint amount) public returns (bool)"
-];
-const contract = new ethers.Contract(tokenAddress, tokenABI, wallet);
-
 // RAZORPAY UPI CONFIGURATION (Optional fallback)
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
