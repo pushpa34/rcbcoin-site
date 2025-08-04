@@ -1,8 +1,8 @@
 import { sendToken } from "../../../utils/sendToken";
-import { NextResponse } from 'next/server';
-import { ethers } from 'ethers';
-import dotenv from 'dotenv';
-import Razorpay from 'razorpay';
+import { NextResponse } from "next/server";
+import { ethers } from "ethers";
+import dotenv from "dotenv";
+import Razorpay from "razorpay";
 
 dotenv.config();
 
@@ -14,13 +14,14 @@ const razorpay = new Razorpay({
 
 export async function POST(req) {
   try {
-    const { userAddress, amountINR } = await req.json();
-await sendToken(userAddress, parseInt(amountINR));
+    const { userAddress, amountInINR } = await req.json();
 
+    // 🔥 Actual transaction: Send tokens to user
+    const tx = await sendToken(userAddress, amountInINR);
 
     return NextResponse.json({ success: true, hash: tx.hash });
   } catch (error) {
-    console.error('Transaction Error:', error);
+    console.error("Transaction Error:", error);
     return NextResponse.json({ success: false, error: error.message });
   }
 }
