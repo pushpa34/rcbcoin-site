@@ -17,10 +17,7 @@ export async function POST(req) {
     const { userAddress, amountInINR } = await req.json();
 
     // Example fixed price: 1 RCB = ₹1
-    const tokensToSend = ethers.utils.parseUnits(amountInINR.toString(), 18);
-
-    const tx = await contract.transfer(userAddress, tokensToSend);
-    await tx.wait();
+    const { userAddress, amountINR } = await req.json();
 
     return NextResponse.json({ success: true, hash: tx.hash });
   } catch (error) {
